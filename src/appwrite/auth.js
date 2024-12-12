@@ -1,26 +1,6 @@
 import conf from '../conf/conf';
 import {Client,Account,ID} from "appwrite";
 
-/*
-import { Client, Account, ID } from "appwrite";
-
-const client = new Client()
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('<PROJECT_ID>');                 // Your project ID
-
-const account = new Account(client);
-
-const user = await account.create(
-    ID.unique(), 
-    'email@example.com', 
-    'password'
-);
-: Ye achhi practice ni hai coz har baar account.create() hme manually dena padega to jo register jo mera component bnega to whn pe hme sb ye expose krna pdega so thoda sa issue aa skta hai so isse better approach hai jo hum use krenge
-*/
-
-//? Will make a class now
-
-
 export class AuthService{
     client = new Client();
     account;
@@ -32,33 +12,8 @@ export class AuthService{
             this.account= new Account(this.client); //account yhn pe bnaya mene  client bn jaaner ke baad
     }
 
-
-    /*
-    *Normal Method using appwrite
-    import { Client, Account, ID } from "appwrite";
-
-    const client = new Client()
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('<PROJECT_ID>');               // Your project ID
-
-    const account = new Account(client);
-
-    const promise = account.create('[USER_ID]', 'email@example.com', '');
-    ? Since account cretaion ke time sbse pehle userId dena hai
-
-    promise.then(function (response) {
-    console.log(response); // Success
-    }, function (error) {
-    console.log(error); // Failure
-    });
-
-    */
-    //ab yhn pe ek aur construcutre usekrunga jisme mai appwrite ko call karunga 
-    // so baad me agar appwrite se shift hona pde to idhr se kr sku rather than appwrite ko directly use krte huye
-    //upar promises de ke bnaya hai isliye async await use kr rha hu 
-
     async createAccount({email, password, name}){
-        //kbhi kbhi fail bhi ho skta hai isliye try and catch me bnaya hu me 
+       
         try {
             console.log("Creating account with email:", email);
             const userAccount=await this.account.create(ID.unique(),email,password,name) 
@@ -83,6 +38,7 @@ export class AuthService{
             throw error;
         }
     }
+    
     //after account creation login 
     async login({email,password}){
         try {

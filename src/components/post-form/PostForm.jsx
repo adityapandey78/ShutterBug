@@ -46,17 +46,7 @@ function PostForm({post}) {
                 }
                 
             }
-            // ye delete krne ke liye appwrite ki services use kr rhe hain
-
-            // const dbPost= await service.updatePost(
-            //     post.$id,{ //ese hi ID set ki jaati hai
-            //         ...data,
-            //         featuredImage:file?file.$id:undefined,   //ye feature image ki ID ke sath set ho ri hai
-            //     });
-            // if (dbPost) {
-            //     navigate(`/post/${dbPost.$id}`);
-            // }
-
+            
             try{
                 const updatePayload={
                 ...data,
